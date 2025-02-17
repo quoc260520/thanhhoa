@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Bus Ad</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #FFC0CB;
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FFC0CB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .heart {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #f0516c; /* Chỉnh màu thành đỏ */
+            height: 50px;
+            width: 50px;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+            z-index: 1001; /* Thêm z-index */
+        }
+        .heart:after, .heart:before {
+            content: "";
+            background-color: #ee6078; /* Chỉnh màu thành đỏ */
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .heart:after {
+            top: 0px;
+            left: 25px;
+        }
+        .heart:before {
+            top: -25px;
+            left: 0px;
+        }
+        @keyframes beat {
+            0% { transform: scale(1) rotate(-45deg); }
+            50% { transform: scale(0.6) rotate(-45deg); }
+        }
+        .road {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            height: 100px;
+            background: #555;
+        }
+        .bus {
+            position: absolute;
+            bottom: 100px;
+            left: -250px;
+            width: 200px;
+            height: 100px;
+            background: url('pink_bus.png') no-repeat center/cover;
+            z-index: 2; 
+        }
+        .ad-banner {
+            position: absolute;
+            transform: translateX(-100%);
+            bottom: 140px;
+            width: 300px;
+            height: 60px;
+            background: #d14674;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .heart-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red; /* Chỉnh màu thành đỏ */
+            border-radius: 50%;
+            animation: floatHeart 2s linear infinite;
+        }
+        
+        @keyframes moveBus {
+            from { left: -250px; }
+            to { left: 100%; }
+        }
+        @keyframes moveClouds {
+            from { background-position: 100% 0; }
+            to { background-position: 0 0; }
+        }
+        @keyframes floatHeart {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+        .move {
+            animation: moveBus 10s linear infinite;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.querySelector('.loader').style.display = 'none';
+            }, 2000);
+            setInterval(() => {
+                let heart = document.createElement('div');
+                heart.className = 'heart-effect';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.bottom = '120px';
+                document.body.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 2000);
+            }, 300);
+        };
+    </script>
+</head>
+<body>
+    <div class="loader">
+        <div class="heart"></div>
+    </div>
+    <div class="clouds"></div>
+    <div class="road"></div>
+    <div class="ad-banner move">Yêu Thanh Hoa nhất trên đời! 💕</div>
+    <div class="bus move"></div>
+</body>
+</html>
